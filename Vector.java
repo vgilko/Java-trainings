@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Vector {
+public class Vector extends Object{
     private double x, y, z;
     private double length;
 
