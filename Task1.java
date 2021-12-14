@@ -141,5 +141,7 @@ public class Task1 {
         System.out.println("\nОтсортироанный массив: ");
         arr = bubbleSort(arr);
         print_array(arr);
+
+        scanner.close();
     }
 }   
