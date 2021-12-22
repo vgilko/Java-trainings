@@ -1,8 +1,26 @@
+package Week1;
+
 import java.util.Random;
 
-public class Vector extends Object{
-    private double x, y, z;
+public class Vector {
+    private final double x, y, z;
     private double length;
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public double getLength() {
+        return length;
+    }
 
     public Vector(double x, double y, double z) {
         this.x = x;
@@ -12,28 +30,12 @@ public class Vector extends Object{
         calculate_length();
     }
 
-    
     private void calculate_length() {
         length = Math.sqrt(x*x + y*y + z*z);
     }
 
-    /** Возвращает массив координат в формате {x,y,z}
-     */
-    public double[] getCoordinates() {
-        return new double[] {x,y,z};
-    }
-
-    
-
-    public double length() {
-        return length;
-    }
-
     public double scalarProduct(Vector another) {
-        double[] anotherVectorCoords = another.getCoordinates();
-        double product = x*anotherVectorCoords[0] + y*anotherVectorCoords[1] + z*anotherVectorCoords[2];
-
-        return product;
+        return x*another.getX() + y* another.getY() + z*another.getZ();
     }
 
     public static Vector[] generateRandomVectors(int amount) throws RuntimeException {
@@ -54,8 +56,6 @@ public class Vector extends Object{
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(x).append(' ').append(y).append(' ').append(z);
-        return sb.toString();
+        return String.valueOf(x) + ' ' + y + ' ' + z;
     }
 }
