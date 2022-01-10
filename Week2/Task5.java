@@ -9,22 +9,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.BiFunction;
 
 public class Task5 {
     public static class ArrayProcessor {
         public static <K> Map<K, Integer> arrayToMap (K[] array) {
             HashMap<K, Integer> result = new HashMap<>();
 
+
             for (K value : array) {
-                if (value != null) {
-                    Integer amount = result.get(value);
-
-                    if (amount == null) {
-                        amount = 0;
+                result.compute(value, new BiFunction<K, Integer, Integer>() {
+                    @Override
+                    public Integer apply(K k, Integer integer) {
+                        return result.containsKey(k) ? result.get(k) + 1 : 1;
                     }
-
-                    result.put(value, amount + 1);
-                }
+                });
             }
 
             return result;
