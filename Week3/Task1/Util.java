@@ -1,6 +1,9 @@
 package Week3.Task1;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 interface Sortable {
@@ -33,6 +36,21 @@ public class Util {
         @Override
         public void sort(List<Human> values) {
             values.sort(Human::compareTo);
+        }
+    }
+
+    public static class Finder {
+        public static Human find (List<Human> list, Human toFind) {
+            Optional<Human> first = list.
+                                        stream().
+                                        filter((Human x) -> x.compareTo(toFind) == 0).
+                                        findFirst();
+
+            if (first.isEmpty()) {
+                throw new NoSuchElementException("Не найден элемент: " + toFind.toString());
+            }
+
+            return first.get();
         }
     }
 

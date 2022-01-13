@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static Week3.Task1.Util.Gender.MAN;
+
 public class Tests {
     static List<Human> generateHumanList (int amount) {
         List<Human> list = new ArrayList<>();
@@ -24,8 +26,7 @@ public class Tests {
         return list;
     }
 
-
-    public static void main(String[] args) {
+    static void testFirstTask () {
         List<Human> list = generateHumanList(100000);
         List<Human> secondList = List.copyOf(list);
 //        System.out.println("Первый");
@@ -53,5 +54,22 @@ public class Tests {
         System.out.printf("\n\nПотрачено времени: %f\n", (endTime - startTime) / 1000f);
         System.out.println("---------");
 
+    }
+
+
+    static void testFind () {
+        List<Human> list = generateHumanList(50);
+        list.add(new Human("valera", 12, MAN));
+
+        list.forEach(System.out::println);
+        System.out.println("==============");
+
+        System.out.println(Util.Finder.find(list, new Human("valera", 12, MAN)));
+
+    }
+
+
+    public static void main(String[] args) {
+        testFind();
     }
 }
