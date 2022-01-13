@@ -9,9 +9,10 @@ import java.util.stream.Collectors;
 
 public class Task6 {
     public static class MapUnion {
-        public static <Type1, Type2> Map<Type1, Type2> mapUnion (Map<Type1, Type2> first, Map<Type1, Type2> second) {
-            HashMap<Type1, Type2> result = new java.util.HashMap<>(Map.copyOf(first));
-            result.putAll(second);
+        public static <K, T> Map<K, T> mapUnion (Map<K, T> first, Map<K, T> second) {
+            HashMap<K, T> result = new java.util.HashMap<>(second);
+
+            result.putAll(first);
 
             return result;
         }

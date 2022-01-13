@@ -123,6 +123,6 @@ public class Util {
 
         Optional<Integer> result = values.stream().filter(x -> x == valueToFind).findFirst();
 
-        return result.orElse(0);
+        return result.map((value) -> value * 2).orElse(0);
     }
 }
