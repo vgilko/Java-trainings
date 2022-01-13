@@ -1,6 +1,6 @@
 package Week3.Task1;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -52,6 +52,30 @@ public class Util {
 
             return first.get();
         }
+    }
+
+
+    public static boolean isAllDigit (String input) {
+        if (input == null) {
+            return false;
+        }
+
+        return input.trim()
+                .chars()
+                .allMatch(Character::isDigit);
+    }
+
+    public static List<String> getHumansPhoneBooks (List<Human> humans) {
+        List<String> list = new ArrayList<>();
+
+        if (humans != null && !humans.isEmpty()) {
+            list = humans.stream()
+                            .map(Human::getPhoneBook)
+                            .flatMap(List::stream)
+                            .collect(Collectors.toList());
+        }
+
+        return list;
     }
 
     public static enum Gender {
