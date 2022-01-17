@@ -1,0 +1,37 @@
+package Week3.Task1.tests;
+
+import Week3.Task1.interfaces.Sortable;
+import Week3.Task1.sort.QuickSort;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class SortTest {
+    private Sortable sort;
+
+    SortTest(Sortable sort) {
+        this.sort = sort;
+    }
+
+    public void testSort () {
+        System.out.println("Начал тестирование.");
+
+        test(Arrays.asList(1, 0, 123, 2));
+        test(Arrays.asList(0, 0, 0, 0));
+        test(new ArrayList<>());
+        test(Arrays.asList(1));
+
+        System.out.println("Успешно завершил тестирование.");
+    }
+
+    private static <T extends Comparable> void test (List<T> values) {
+        new QuickSort().sort(values);
+
+        for (int i = 1; i < values.size() - 1; i++) {
+            if (values.get(i - 1).compareTo(values.get(i)) > 1) {
+                throw new RuntimeException("Последовательность не монотонна.");
+            }
+        }
+    }
+}
