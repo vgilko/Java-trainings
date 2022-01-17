@@ -5,56 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Week3.Task1.Util;
+import Week3.Task1.enums.Gender;
 
 import static Week3.Task1.Util.isAllDigit;
 
 public class Human implements Comparable {
     private String name;
     private int age;
-    private Util.Gender gender;
+    private Gender gender;
     private ArrayList<String> phoneBook;
+
+    public Human(String name, int age, Gender gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+
+        phoneBook = new ArrayList<>();
+    }
+
+    public Human (String name, int age, Gender gender, List<String> phones) {
+        this (name, age, gender);
+
+        addPhones(phones);
+    }
 
     public ArrayList<String> getPhoneBook() {
         return phoneBook;
     }
 
-
-    public void addPhone (String phone) {
-        if (phone != null) {
-            if (!isAllDigit(phone)) {
-                throw new IllegalArgumentException("Номер телефона не должен содержать ничего кроме цифр. Ошибочный номер: " + phone);
-            }
-
-            phoneBook.add(phone);
-        }
-
-    }
-
-
-    public void addPhones (List<String> phones) {
-        if (phones != null) {
-            List<String> invalidPhones = getInvalidPhones(phones);
-
-            if (!invalidPhones.isEmpty())
-                throw new IllegalArgumentException("Неправильный формат номеров:\n" + invalidPhones);
-
-            phoneBook.addAll(phones);
-        }
-    }
-
-    List<String> getInvalidPhones (List<String> phones) {
-        if (phones != null) {
-            return phones.stream()
-                            .filter(x -> !isAllDigit(x))
-                            .peek(System.out::println)
-                            .collect(Collectors.toList());
-        }
-
-        return new ArrayList<>();
-    }
-
-    public Util.Gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -66,46 +45,34 @@ public class Human implements Comparable {
         return name;
     }
 
-    Human (String name, int age, Util.Gender gender) {
-        phoneBook = new ArrayList<>();
+    public void addPhone (String phone) {
+        if (phone != null) {
+            if (!isAllDigit(phone)) {
+                throw new IllegalArgumentException("Номер телефона не должен содержать ничего кроме цифр. Ошибочный номер: " + phone);
+            }
 
-        if (name == null)
-            throw new IllegalArgumentException("Имя не задано.");
-
-        if (age < 0)
-            throw new IllegalArgumentException("Возраст не может быть отприцательным.");
-
-        if (gender == null)
-            throw new IllegalArgumentException("Пол не задан.");
-
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+            phoneBook.add(phone);
+        }
     }
 
-    Human (String name, int age, Util.Gender gender, List<String> phones) { // можно ли повторяющийся код как-то убрать?
-        phoneBook = new ArrayList<>();
 
-        if (name == null)
-            throw new IllegalArgumentException("Имя не задано.");
-
-        if (age < 0)
-            throw new IllegalArgumentException("Возраст не может быть отприцательным.");
-
-        if (gender == null)
-            throw new IllegalArgumentException("Пол не задан.");
-
+    public void addPhones (List<String> phones) {
         if (phones != null) {
-            addPhones(phones);
-        } else {
-            phoneBook = new ArrayList<>();
+            if (hasInvalidPhones(phones))
+                throw new IllegalArgumentException("Неправильный формат номеров.");
+
+            phoneBook.addAll(phones);
         }
+    }
 
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+    boolean hasInvalidPhones (List<String> phones) {
+        if (phones != null)
+            return phones.stream()
+                        .filter(x -> !isAllDigit(x))
+                        .peek(x -> System.out.println("Неправильный номер: " + x))
+                        .count() != 0;
 
-
+        return false;
     }
 
     @Override
