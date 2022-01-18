@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SortTest {
-    private Sortable sort;
+    private final Sortable sort;
 
     SortTest(Sortable sort) {
         this.sort = sort;
@@ -17,15 +17,15 @@ public class SortTest {
     public void testSort () {
         System.out.println("Начал тестирование.");
 
-        test(Arrays.asList(1, 0, 123, 2));
+        test(Arrays.asList(1, 0, 123, 2, 1));
         test(Arrays.asList(0, 0, 0, 0));
-        test(new ArrayList<>());
+        test(new ArrayList<Integer>());
         test(Arrays.asList(1));
 
         System.out.println("Успешно завершил тестирование.");
     }
 
-    private static <T extends Comparable> void test (List<T> values) {
+    private static <T extends Comparable<T>> void test (List<T> values) {
         new QuickSort().sort(values);
 
         for (int i = 1; i < values.size() - 1; i++) {

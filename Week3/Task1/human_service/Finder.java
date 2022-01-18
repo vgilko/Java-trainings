@@ -10,8 +10,12 @@ public class Finder {
     public static Human find (List<Human> list, Human toFind) {
         Optional<Human> first = list.
                 stream().
-                filter((Human x) -> x.compareTo(toFind) == 0).
-                findFirst();
+                filter(x -> {
+                    return x.getAge() == toFind.getAge() &&
+                            x.getGender().equals(toFind.getGender()) &&
+                            x.getName().equals(toFind.getName());
+                })
+                .findFirst();
 
         if (first.isEmpty()) {
             throw new NoSuchElementException("Не найден элемент: " + toFind.toString());

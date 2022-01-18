@@ -2,18 +2,20 @@ package Week3.Task1;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import Week3.Task1.enums.Gender;
 
 import static Week3.Task1.Util.isAllDigit;
 
-public class Human implements Comparable {
-    private String name;
-    private int age;
-    private Gender gender;
-    private ArrayList<String> phoneBook;
+public class Human implements Comparable<Human> {
+    private final String name;
+    private final int age;
+    private final Gender gender;
+    private final List<String> phoneBook;
 
     public Human(String name, int age, Gender gender) {
         this.name = name;
@@ -29,7 +31,7 @@ public class Human implements Comparable {
         addPhones(phones);
     }
 
-    public ArrayList<String> getPhoneBook() {
+    public List<String> getPhoneBook() {
         return phoneBook;
     }
 
@@ -56,6 +58,24 @@ public class Human implements Comparable {
     }
 
 
+    @Override
+    public String toString () {
+        return name + " | " + gender.toString() + " | " + age;
+    }
+
+
+    @Override
+    public int compareTo(Human human) {
+        if (human == null)
+            throw new NullPointerException();
+
+        return Comparator.comparing(Human::getGender).reversed()
+                            .thenComparing(Human::getAge).reversed()
+                            .thenComparing(Human::getName)
+                            .compare(this, human);
+    }
+
+
     public void addPhones (List<String> phones) {
         if (phones != null) {
             if (hasInvalidPhones(phones))
@@ -65,44 +85,15 @@ public class Human implements Comparable {
         }
     }
 
+
     boolean hasInvalidPhones (List<String> phones) {
         if (phones != null)
             return phones.stream()
-                        .filter(x -> !isAllDigit(x))
-                        .peek(x -> System.out.println("Неправильный номер: " + x))
-                        .count() != 0;
+                    .filter(x -> !isAllDigit(x))
+                    .peek(x -> System.out.println("Неправильный номер: " + x))
+                    .count() != 0;
 
         return false;
     }
 
-    @Override
-    public String toString () {
-        return name + " | " + gender.toString() + " | " + age;
-    }
-
-    @Override
-    public int compareTo(Object human) {
-        if (human == null)
-            throw new NullPointerException();
-
-        int result = this.getName().compareTo(((Human) human).getName());
-
-        if (result == 0) {
-
-            int ageComparison = 0;
-
-            if (age > ((Human) human).getAge()) {
-                ageComparison = 1;
-            } else if (age < ((Human) human).getAge()) {
-                ageComparison = -1;
-            }
-
-            String nameAndGenderFirst = (name + gender.ordinal()) + (-ageComparison);
-            String nameAndGenderSecond = (((Human) human).getName() + ((Human) human).getGender().ordinal()) + ageComparison;
-
-            result =  nameAndGenderFirst.compareTo(nameAndGenderSecond);
-        }
-
-        return result;
-    }
 }

@@ -4,5 +4,5 @@ import Week3.Task2.subclasses.Celsius;
 import Week3.Task2.super_class.Degree;
 
 public interface Convert {
-    public <T extends Degree> T convert (Celsius degree);
+    <T extends Degree> T convert (Celsius degree);
 }

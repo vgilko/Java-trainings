@@ -4,14 +4,15 @@ import Week3.Task1.Human;
 import Week3.Task1.sort.BubbleSort;
 import Week3.Task1.sort.QuickSort;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static Week3.Task1.tests.Generators.generateHumanList;
 
 public class TaskTest {
     static void testFirstTask () {
-        List<Human> list = generateHumanList(1000);
-        List<Human> secondList = List.copyOf(list);
+        List<Human> list = generateHumanList(10000);
+        ArrayList<Human> secondList = new ArrayList<>(list);
 //        System.out.println("Первый");
 //        list.forEach(System.out::println);
 //        System.out.println("\n\nВторой");
@@ -31,7 +32,7 @@ public class TaskTest {
 
         System.out.println("Второй после сортировки:");
         startTime = System.currentTimeMillis();
-        bubbleSort.sort(list);
+        bubbleSort.sort(secondList);
 //        list.forEach(System.out::println);
         endTime = System.currentTimeMillis();
         System.out.printf("\n\nПотрачено времени: %f\n", (endTime - startTime) / 1000f);
