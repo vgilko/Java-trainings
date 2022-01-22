@@ -1,6 +1,6 @@
-package Week3.Task3.implementations;
+package Week4.Task1.implementations;
 
-import Week3.Task3.interfaces.SolidOfRevolution;
+import Week4.Task1.interfaces.SolidOfRevolution;
 
 public class Ball extends SolidOfRevolution {
     public Ball(double radius) {

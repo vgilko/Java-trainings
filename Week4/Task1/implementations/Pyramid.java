@@ -1,6 +1,6 @@
-package Week3.Task3.implementations;
+package Week4.Task1.implementations;
 
-import Week3.Task3.interfaces.Shape;
+import Week4.Task1.interfaces.Shape;
 
 public class Pyramid extends Shape {
     private final double baseSquare;

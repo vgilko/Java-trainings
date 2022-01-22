@@ -50,7 +50,7 @@ public class Human implements Comparable<Human> {
     public void addPhone (String phone) {
         if (phone != null) {
             if (!isAllDigit(phone)) {
-                throw new IllegalArgumentException("Номер телефона не должен содержать ничего кроме цифр. Ошибочный номер: " + phone);
+                throw new IllegalArgumentException("Номер телефона не должен содержать ничего кроме цифр.");
             }
 
             phoneBook.add(phone);

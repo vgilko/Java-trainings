@@ -1,4 +1,4 @@
-package Week3.Task3.interfaces;
+package Week4.Task1.interfaces;
 
 public abstract class SolidOfRevolution extends Shape {
     protected double radius;
