@@ -1,10 +1,24 @@
-package Week3.Task1.sort;
-import java.util.List;
+package Week4.Task3.sort;
+import Week4.Task3.interfaces.Sortable;
 
-import Week3.Task1.interfaces.Sortable;
+import java.util.List;
 
 
 public class BubbleSort implements Sortable {
+    private static Sortable sortable;
+
+    private BubbleSort () {
+
+    }
+
+    public static Sortable getInstance () {
+        if (sortable == null) {
+            sortable = new BubbleSort();
+        }
+
+        return sortable;
+    }
+
     @Override
     public <T extends Comparable<T>> void sort(List<T> values) {
         for (int m = 0; m < values.size (); m++) {

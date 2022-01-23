@@ -1,7 +1,7 @@
-package Week3.Task1.tests;
+package Week4.Task3.tests;
 
-import Week3.Task1.Human;
-import Week3.Task1.enums.Gender;
+import Week4.Task3.Human;
+import Week4.Task3.enums.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class Generators {
     }
 
 
-    public static List<Human> generateHumanList(int amount) {
+    static List<Human> generateHumanList (int amount) {
         List<Human> list = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
